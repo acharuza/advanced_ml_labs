@@ -32,4 +32,10 @@ class BinaryClassifier:
         return (proba >= treshold).astype(int)
 
     def get_params(self):
-        return self.prior_proba0, self.prior_proba1, self.means0, self.means1
+        params = {
+            "prior_proba0": self.prior_proba0,
+            "prior_proba1": self.prior_proba1,
+            "means0": self.means0,
+            "means1": self.means1,
+        }
+        return params

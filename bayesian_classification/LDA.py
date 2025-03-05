@@ -44,7 +44,9 @@ class LDA(BinaryClassifier):
         return proba
 
     def get_params(self):
-        return *super().get_params(), self.cov_matrix
+        params = super().get_params()
+        params["cov_matrix"] = self.cov_matrix
+        return params
 
 
 if __name__ == "__main__":

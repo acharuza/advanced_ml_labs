@@ -47,7 +47,10 @@ class QDA(BinaryClassifier):
         return proba
 
     def get_params(self):
-        return *super().get_params(), self.cov_matrix0, self.cov_matrix1
+        params = super().get_params()
+        params["cov_matrix0"] = self.cov_matrix0
+        params["cov_matrix1"] = self.cov_matrix1
+        return params
 
 
 if __name__ == "__main__":
