@@ -1,4 +1,4 @@
-from implementation.binary_classifier import BinaryClassifier
+from .binary_classifier import BinaryClassifier
 import numpy as np
 
 
