@@ -1,4 +1,4 @@
-from binary_classifier import BinaryClassifier
+from implementation.binary_classifier import BinaryClassifier
 import numpy as np
 
 
@@ -25,8 +25,12 @@ class NB(BinaryClassifier):
             return first_term * second_term
 
         # calculate x given y probabilities
-        x_given_y0 = np.prod(gaussian_density(Xtest, self.means0, self.variances0), axis=1)
-        x_given_y1 = np.prod(gaussian_density(Xtest, self.means1, self.variances1), axis=1)
+        x_given_y0 = np.prod(
+            gaussian_density(Xtest, self.means0, self.variances0), axis=1
+        )
+        x_given_y1 = np.prod(
+            gaussian_density(Xtest, self.means1, self.variances1), axis=1
+        )
 
         # calculate y given x probability for class 1
         denominator = x_given_y0 * self.prior_proba0 + x_given_y1 * self.prior_proba1
@@ -39,17 +43,3 @@ class NB(BinaryClassifier):
         params["variances0"] = self.variances0
         params["variances1"] = self.variances1
         return params
-
-
-if __name__ == "__main__":
-    from sklearn.metrics import accuracy_score
-    from dataset_generation import generate_dataset1
-
-    Xtrain, ytrain = generate_dataset1(10)
-    Xtest, ytest = generate_dataset1(10)
-
-    nb_classifier = NB()
-
-    nb_classifier.fit(Xtrain, ytrain)
-    ypred = nb_classifier.predict(Xtest)
-    print(accuracy_score(ytest, ypred))

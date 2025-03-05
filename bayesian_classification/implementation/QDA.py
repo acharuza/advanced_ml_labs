@@ -1,4 +1,4 @@
-from binary_classifier import BinaryClassifier
+from implementation.binary_classifier import BinaryClassifier
 import numpy as np
 
 
@@ -51,19 +51,3 @@ class QDA(BinaryClassifier):
         params["cov_matrix0"] = self.cov_matrix0
         params["cov_matrix1"] = self.cov_matrix1
         return params
-
-
-if __name__ == "__main__":
-    from sklearn.metrics import accuracy_score
-    from dataset_generation import generate_dataset
-
-    Xtrain, ytrain = generate_dataset(1000, 2, (0, 10), (1, 1), 123)
-    Xtest, ytest = generate_dataset(1000, 2, (0, 10), (1, 1), 321)
-
-    qda_classifier = QDA()
-
-    qda_classifier.fit(Xtrain, ytrain)
-    ypred = qda_classifier.predict(Xtest)
-
-    print(accuracy_score(ytest, ypred))
-    print(qda_classifier.get_params())

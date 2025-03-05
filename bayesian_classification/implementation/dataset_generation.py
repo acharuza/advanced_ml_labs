@@ -24,7 +24,3 @@ def generate_dataset2(a, ro):
         np.random.multivariate_normal(mean=[a, a], cov=cov_matrix1, size=N_SAMPLES),
     )
     return X, y
-
-
-if __name__ == "__main__":
-    X, y = generate_dataset2(5, 0.5)

@@ -1,4 +1,4 @@
-from binary_classifier import BinaryClassifier
+from implementation.binary_classifier import BinaryClassifier
 import numpy as np
 
 
@@ -47,18 +47,3 @@ class LDA(BinaryClassifier):
         params = super().get_params()
         params["cov_matrix"] = self.cov_matrix
         return params
-
-
-if __name__ == "__main__":
-    from sklearn.metrics import accuracy_score
-    from dataset_generation import generate_dataset2
-
-    Xtrain, ytrain = generate_dataset2(0.1, 0.8)
-    Xtest, ytest = generate_dataset2(0.1, 0.8)
-
-    lda_classifier = LDA()
-
-    lda_classifier.fit(Xtrain, ytrain)
-    ypred = lda_classifier.predict(Xtest)
-
-    print(accuracy_score(ytest, ypred))
