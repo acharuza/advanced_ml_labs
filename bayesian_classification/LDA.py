@@ -51,10 +51,10 @@ class LDA(BinaryClassifier):
 
 if __name__ == "__main__":
     from sklearn.metrics import accuracy_score
-    from dataset_generation import generate_dataset
+    from dataset_generation import generate_dataset2
 
-    Xtrain, ytrain = generate_dataset(1000, 2, (0, 10), (1, 1), 123)
-    Xtest, ytest = generate_dataset(1000, 2, (0, 10), (1, 1), 321)
+    Xtrain, ytrain = generate_dataset2(0.1, 0.8)
+    Xtest, ytest = generate_dataset2(0.1, 0.8)
 
     lda_classifier = LDA()
 
@@ -62,4 +62,3 @@ if __name__ == "__main__":
     ypred = lda_classifier.predict(Xtest)
 
     print(accuracy_score(ytest, ypred))
-    print(lda_classifier.get_params())

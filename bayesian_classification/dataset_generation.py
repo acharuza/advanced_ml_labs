@@ -1,11 +1,30 @@
 import numpy as np
 
-def generate_dataset(n_samples, n_features, mean, variance, seed):
-    np.random.seed(seed)
-    y = np.random.binomial(1, 0.5, n_samples)
-    n1 = np.sum(y)
-    n0 = len(y) - n1
-    X = np.where(y[:, None] == 0,
-                 np.random.normal(mean[0], variance[0], (n_samples, n_features)),
-                 np.random.normal(mean[1], variance[1], (n_samples, n_features)))
-    return X, y    
+N_SAMPLES = 1000
+N_FEATURES = 2
+
+
+def generate_dataset1(a):
+    y = np.random.binomial(1, 0.5, N_SAMPLES)
+    X = np.where(
+        y[:, None] == 0,
+        np.random.normal(loc=0, scale=1, size=(N_SAMPLES, N_FEATURES)),
+        np.random.normal(loc=a, scale=1, size=(N_SAMPLES, N_FEATURES)),
+    )
+    return X, y
+
+
+def generate_dataset2(a, ro):
+    y = np.random.binomial(1, 0.5, N_SAMPLES)
+    cov_matrix0 = np.array([[1, ro], [ro, 1]])
+    cov_matrix1 = np.array([[1, -ro], [-ro, 1]])
+    X = np.where(
+        y[:, None] == 0,
+        np.random.multivariate_normal(mean=[0, 0], cov=cov_matrix0, size=N_SAMPLES),
+        np.random.multivariate_normal(mean=[a, a], cov=cov_matrix1, size=N_SAMPLES),
+    )
+    return X, y
+
+
+if __name__ == "__main__":
+    X, y = generate_dataset2(5, 0.5)

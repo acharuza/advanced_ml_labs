@@ -43,14 +43,13 @@ class NB(BinaryClassifier):
 
 if __name__ == "__main__":
     from sklearn.metrics import accuracy_score
-    from dataset_generation import generate_dataset
+    from dataset_generation import generate_dataset1
 
-    Xtrain, ytrain = generate_dataset(1000, 2, (0, 10), (1, 2), 123)
-    Xtest, ytest = generate_dataset(1000, 2, (0, 10), (1, 2), 321)
+    Xtrain, ytrain = generate_dataset1(10)
+    Xtest, ytest = generate_dataset1(10)
 
     nb_classifier = NB()
 
     nb_classifier.fit(Xtrain, ytrain)
     ypred = nb_classifier.predict(Xtest)
-    print(ypred)
     print(accuracy_score(ytest, ypred))
