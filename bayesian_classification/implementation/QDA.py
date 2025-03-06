@@ -17,6 +17,10 @@ class QDA(BinaryClassifier):
         self.cov_matrix0 = np.cov(self.X0, rowvar=False)
         self.cov_matrix1 = np.cov(self.X1, rowvar=False)
 
+        # adding small value to the diagonal to ensure matrix is invertible
+        self.cov_matrix0 += np.eye(self.cov_matrix0.shape[0]) * 1e-6
+        self.cov_matrix1 += np.eye(self.cov_matrix1.shape[0]) * 1e-6
+
     def predict_proba(self, Xtest):
         # calculate x given y probabilities
         inv_cov_matrix0 = np.linalg.inv(self.cov_matrix0)

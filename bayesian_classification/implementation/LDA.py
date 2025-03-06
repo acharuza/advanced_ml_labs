@@ -19,6 +19,8 @@ class LDA(BinaryClassifier):
         cov0 = np.cov(self.X0, rowvar=False)
         cov1 = np.cov(self.X1, rowvar=False)
         self.cov_matrix = (cov0 * (n0 - 1) + cov1 * (n1 - 1)) / (n0 + n1 - 2)
+        # adding small value to the diagonal to ensure matrix is invertible
+        self.cov_matrix += np.eye(self.cov_matrix.shape[0]) * 1e-6
 
     def predict_proba(self, Xtest):
         # calculate x given y probabilities
